@@ -200,13 +200,11 @@ export default class VideoPlayer extends Component {
   }
 
   onToggleFullScreen() {
-    if(Platform.OS === "android")
-    {
+    if (Platform.OS === "android") {
       var uri = this.props.video.uri;
       NativeModules.BridgeModule.showFullscreen(uri);
     }
-    else
-    {
+    else {
       this.player.presentFullscreenPlayer();
     }
   }
@@ -357,7 +355,7 @@ export default class VideoPlayer extends Component {
             customStyles.seekBarProgress,
           ]}
         />
-        { !fullWidth ? (
+        {!fullWidth ? (
           <View
             style={[
               styles.seekBarKnob,
@@ -373,7 +371,7 @@ export default class VideoPlayer extends Component {
             onResponderRelease={this.onSeekRelease}
             onResponderTerminate={this.onSeekRelease}
           />
-        ) : null }
+        ) : null}
         <View style={[
           styles.seekBarBackground,
           { flexGrow: 1 - this.state.progress },
@@ -407,7 +405,7 @@ export default class VideoPlayer extends Component {
             />
           </TouchableOpacity>
         )}
-        <TouchableOpacity onPress={this.onToggleFullScreen} style={customStyles.controlButton}>
+        <TouchableOpacity onPress={this.props.toggleFullScreen} style={customStyles.controlButton}>
           <Icon
             style={[styles.extraControl, customStyles.controlIcon]}
             name="fullscreen"
@@ -483,46 +481,6 @@ export default class VideoPlayer extends Component {
     );
   }
 }
-
-// VideoPlayer.propTypes = {
-//   video: Video.propTypes.source,
-//   thumbnail: Image.propTypes.source,
-//   videoWidth: PropTypes.number,
-//   videoHeight: PropTypes.number,
-//   duration: PropTypes.number,
-//   autoplay: PropTypes.bool,
-//   defaultMuted: PropTypes.bool,
-//   muted: PropTypes.bool,
-//   style: View.propTypes.style,
-//   controlsTimeout: PropTypes.number,
-//   disableControlsAutoHide: PropTypes.bool,
-//   loop: PropTypes.bool,
-//   resizeMode: Video.propTypes.resizeMode,
-//   hideControlsOnStart: PropTypes.bool,
-//   endWithThumbnail: PropTypes.bool,
-//   customStyles: PropTypes.shape({
-//     wrapper: View.propTypes.style,
-//     video: Video.propTypes.style,
-//     videoWrapper: View.propTypes.style,
-//     controls: View.propTypes.style,
-//     playControl: TouchableOpacity.propTypes.style,
-//     controlButton: TouchableOpacity.propTypes.style,
-//     controlIcon: Icon.propTypes.style,
-//     playIcon: Icon.propTypes.style,
-//     seekBar: View.propTypes.style,
-//     seekBarFullWidth: View.propTypes.style,
-//     seekBarProgress: View.propTypes.style,
-//     seekBarKnob: View.propTypes.style,
-//     seekBarKnobSeeking: View.propTypes.style,
-//     seekBarBackground: View.propTypes.style,
-//     thumbnail: Image.propTypes.style,
-//     playButton: TouchableOpacity.propTypes.style,
-//     playArrow: Icon.propTypes.style,
-//   }),
-//   onEnd: PropTypes.func,
-//   onProgress: PropTypes.func,
-//   onLoad: PropTypes.func,
-// };
 
 VideoPlayer.defaultProps = {
   videoWidth: 1280,
